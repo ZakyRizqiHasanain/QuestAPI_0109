@@ -1,5 +1,6 @@
 package com.example.questapi.repositori
 
+import android.app.Application
 import com.example.questapi.apiservice.ServiceApiSiswa
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -13,6 +14,13 @@ interface ContainerApp {
 class DefaultContainerApp : ContainerApp{
     private val baseurl = "http://10.0.2.2/umyTI/"
 
+//    val logging = HttpLoggingInterceptor().apply {
+//        level = HttpLoggingInterceptor.Level.BODY
+//    }
+//    val klien = OkHttpClient.Builder()
+//        .addInterceptor(logging)
+//        .build()
+
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(baseurl)
         .addConverterFactory(
@@ -22,6 +30,7 @@ class DefaultContainerApp : ContainerApp{
                 isLenient = true
             }.asConverterFactory("application/json".toMediaType())
         )
+//        .client(klien)
         .build()
 
     private val retrofitService : ServiceApiSiswa by lazy {
